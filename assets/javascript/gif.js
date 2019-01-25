@@ -15,20 +15,26 @@ function displayGif() {
         var gif = response.data;
         for (var i = 0; i < gif.length; i++) {
 
-            var imageUrlStatic = gif[i].images.fixed_height_still.url;
             var imageUrlDynamic = gif[i].images.fixed_height.url;
+            var imageUrlStatic = gif[i].images.fixed_height_still.url;
+            var $gifImage = $("<img>");
+            var $imageDiv = $("<div>");
+            var rating = $(`<p>Rating: ${gif[i].rating}</p>`);
 
-            var gifImage = $("<img>");
-            gifImage.attr("src", imageUrlStatic);
-            gifImage.attr("alt", "gif");
-            gifImage.attr("data-state", "still");
-            gifImage.attr("data-still", imageUrlStatic);
-            gifImage.attr("data-dynamic", imageUrlDynamic);
-            gifImage.addClass("gifImage");
-            $gifView.append(gifImage);
+
+            $gifImage.attr("src", imageUrlStatic);
+            $gifImage.attr("alt", "gif");
+            $gifImage.addClass("gifImage");
+            $gifImage.attr("data-state", "still");
+            $gifImage.attr("data-still", imageUrlStatic);
+            $gifImage.attr("data-dynamic", imageUrlDynamic);
+            $imageDiv.append($gifImage);
+            $gifView.append($imageDiv);
+            $imageDiv.prepend(rating);
+            
             $(".gifImage").on("click", function () {
                 var state = $(this).attr("data-state");
-
+                console.log(state);
                 if (state === 'still') {
                     $(this).attr('src', $(this).attr('data-dynamic'));
                     $(this).attr('data-state', 'dynamic');
@@ -77,7 +83,7 @@ $(document).on("click", ".gif", displayGif);
 
 
 
-// $(".gifImage").on("click", function () {
+// $(".$gifImage").on("click", function () {
 //     var state = $(this).attr("data-state");
 //     console.log(state);
 //     if (state === 'still') {
