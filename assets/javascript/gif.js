@@ -13,14 +13,32 @@ function displayGif() {
     }).then(function (response) {
         var $gifView = $("#gif-view");
         var gif = response.data;
-        for (var i = 0; i < gif.length; i++){
+        for (var i = 0; i < gif.length; i++) {
 
-            var imageUrl = gif[i].images.fixed_height_still.url;
+            var imageUrlStatic = gif[i].images.fixed_height_still.url;
+            var imageUrlDynamic = gif[i].images.fixed_height.url;
 
             var gifImage = $("<img>");
-            gifImage.attr("src", imageUrl);
+            gifImage.attr("src", imageUrlStatic);
             gifImage.attr("alt", "gif");
+            gifImage.attr("data-state", "still");
+            gifImage.attr("data-still", imageUrlStatic);
+            gifImage.attr("data-dynamic", imageUrlDynamic);
+            gifImage.addClass("gifImage");
             $gifView.append(gifImage);
+            $(".gifImage").on("click", function () {
+                var state = $(this).attr("data-state");
+
+                if (state === 'still') {
+                    $(this).attr('src', $(this).attr('data-dynamic'));
+                    $(this).attr('data-state', 'dynamic');
+                } else {
+                    $(this).attr('src', $(this).attr('data-still'));
+                    $(this).attr('data-state', 'still');
+                }
+
+            })
+
 
         }
 
@@ -29,7 +47,7 @@ function displayGif() {
 
 
 }
-
+// Render buttons from array
 function renderButtons() {
     $main.empty();
 
@@ -43,7 +61,7 @@ function renderButtons() {
 
 }
 
-
+// Add new gif buttons
 $("#add-gif").on("click", function (event) {
 
     event.preventDefault();
@@ -57,8 +75,26 @@ $("#add-gif").on("click", function (event) {
 renderButtons();
 $(document).on("click", ".gif", displayGif);
 
+
+
+// $(".gifImage").on("click", function () {
+//     var state = $(this).attr("data-state");
+//     console.log(state);
+//     if (state === 'still') {
+//         $(this).attr('src', $(this).attr('data-animate'));
+//         $(this).attr('data-state', 'animate');
+//     } else {
+//         $(this).attr('src', $(this).attr('data-still'));
+//         $(this).attr('data-state', 'still');
+//     }
+
+// })
+
 // Create buttons on load
 // create and get a value from those buttons to use in api url
 // run an api key and append to DOM
 // Make search field 
 // Take search term and make button with value
+// Images are static onload
+// If an image is clicked it becomes dynamic
+// If an image is dynamic and is then clicked it becomes static again
