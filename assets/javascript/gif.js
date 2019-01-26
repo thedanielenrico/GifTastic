@@ -24,29 +24,32 @@ function displayGif() {
 
             $gifImage.attr("src", imageUrlStatic);
             $gifImage.attr("alt", "gif");
+            $gifImage.attr("alt", "gif");
+            $gifImage.attr("style", "padding: 30px");
+
             $gifImage.addClass("gifImage");
             $gifImage.attr("data-state", "still");
             $gifImage.attr("data-still", imageUrlStatic);
             $gifImage.attr("data-dynamic", imageUrlDynamic);
             $imageDiv.append($gifImage);
-            $gifView.append($imageDiv);
+            $gifView.prepend($gifImage);
             $imageDiv.prepend(rating);
             
-            $(".gifImage").on("click", function () {
-                var state = $(this).attr("data-state");
-                console.log(state);
-                if (state === 'still') {
-                    $(this).attr('src', $(this).attr('data-dynamic'));
-                    $(this).attr('data-state', 'dynamic');
-                } else {
-                    $(this).attr('src', $(this).attr('data-still'));
-                    $(this).attr('data-state', 'still');
-                }
-
-            })
-
-
+            
+            
         }
+                $(".gifImage").on("click", function () {
+                    var state = $(this).attr("data-state");
+                    console.log(state);
+                    if (state === 'still') {
+                        $(this).attr('src', $(this).attr('data-dynamic'));
+                        $(this).attr('data-state', 'dynamic');
+                    } else {
+                        $(this).attr('src', $(this).attr('data-still'));
+                        $(this).attr('data-state', 'still');
+                    }
+    
+                })
 
 
     })
