@@ -20,41 +20,34 @@ function displayGif() {
             var $gifImage = $("<img>");
             var $imageDiv = $("<div>");
             var rating = $(`<p>Rating: ${gif[i].rating}</p>`);
-
+            console.log(rating);
 
             $gifImage.attr("src", imageUrlStatic);
             $gifImage.attr("alt", "gif");
             $gifImage.attr("alt", "gif");
             $gifImage.attr("style", "padding: 30px");
+            $imageDiv.attr("style", "float: left");
 
             $gifImage.addClass("gifImage");
             $gifImage.attr("data-state", "still");
             $gifImage.attr("data-still", imageUrlStatic);
             $gifImage.attr("data-dynamic", imageUrlDynamic);
             $imageDiv.append($gifImage);
-            $gifView.prepend($gifImage);
             $imageDiv.prepend(rating);
-            
-            
-            
+            $gifView.prepend($imageDiv);
         }
-                $(".gifImage").on("click", function () {
-                    var state = $(this).attr("data-state");
-                    console.log(state);
-                    if (state === 'still') {
-                        $(this).attr('src', $(this).attr('data-dynamic'));
-                        $(this).attr('data-state', 'dynamic');
-                    } else {
-                        $(this).attr('src', $(this).attr('data-still'));
-                        $(this).attr('data-state', 'still');
-                    }
-    
-                })
-
-
+        $(".gifImage").on("click", function () {
+            var state = $(this).attr("data-state");
+            console.log(state);
+            if (state === 'still') {
+                $(this).attr('src', $(this).attr('data-dynamic'));
+                $(this).attr('data-state', 'dynamic');
+            } else {
+                $(this).attr('src', $(this).attr('data-still'));
+                $(this).attr('data-state', 'still');
+            }
+        })
     })
-
-
 }
 // Render buttons from array
 function renderButtons() {
@@ -85,19 +78,6 @@ renderButtons();
 $(document).on("click", ".gif", displayGif);
 
 
-
-// $(".$gifImage").on("click", function () {
-//     var state = $(this).attr("data-state");
-//     console.log(state);
-//     if (state === 'still') {
-//         $(this).attr('src', $(this).attr('data-animate'));
-//         $(this).attr('data-state', 'animate');
-//     } else {
-//         $(this).attr('src', $(this).attr('data-still'));
-//         $(this).attr('data-state', 'still');
-//     }
-
-// })
 
 // Create buttons on load
 // create and get a value from those buttons to use in api url
