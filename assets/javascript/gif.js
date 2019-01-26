@@ -36,19 +36,24 @@ function displayGif() {
             $imageDiv.prepend(rating);
             $gifView.prepend($imageDiv);
         }
-        $(".gifImage").on("click", function () {
-            var state = $(this).attr("data-state");
-            console.log(state);
-            if (state === 'still') {
-                $(this).attr('src', $(this).attr('data-dynamic'));
-                $(this).attr('data-state', 'dynamic');
-            } else {
-                $(this).attr('src', $(this).attr('data-still'));
-                $(this).attr('data-state', 'still');
-            }
-        })
+
+        $(".gifImage").off("click", playGif);
+        $(".gifImage").on("click", playGif);
     })
 }
+
+function playGif() {
+    var state = $(this).attr("data-state");
+    console.log(state);
+    if (state === 'still') {
+        $(this).attr('src', $(this).attr('data-dynamic'));
+        $(this).attr('data-state', 'dynamic');
+    } else {
+        $(this).attr('src', $(this).attr('data-still'));
+        $(this).attr('data-state', 'still');
+    }
+}
+
 // Render buttons from array
 function renderButtons() {
     $main.empty();
