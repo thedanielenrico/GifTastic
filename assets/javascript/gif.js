@@ -1,12 +1,10 @@
-
-
 var gifArray = ['Seinfeld', 'Waynes World', 'SNL', 'Dr. Who', 'Nature', 'Cats', 'Dog', 'Elon Musk', 'Jeff Bezos', 'Math', 'Software'];
 var $main = $("#main");
 
 function displayGif() {
     var gifData = $(this).attr("data-name");
     var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + gifData + "&api_key=MMiAFfOYfGl8xNgfZoJtXEgClTp4bg5k&limit=10";
-    console.log(queryUrl);
+
     $.ajax({
         url: queryUrl,
         method: "GET",
@@ -20,6 +18,8 @@ function displayGif() {
             var $gifImage = $("<img>");
             var $imageDiv = $("<div>");
             var rating = $(`<p>Rating: ${gif[i].rating}</p>`);
+            var title = $(`<p>Title: ${gif[i].title}</p>`);
+
 
             $gifImage.attr("src", imageUrlStatic);
             $gifImage.attr("alt", "gif");
@@ -33,6 +33,7 @@ function displayGif() {
             $gifImage.attr("data-dynamic", imageUrlDynamic);
             $imageDiv.append($gifImage);
             $imageDiv.prepend(rating);
+            $imageDiv.prepend(title);
             $gifView.prepend($imageDiv);
         }
 
@@ -43,7 +44,7 @@ function displayGif() {
 
 function playGif() {
     var state = $(this).attr("data-state");
-    console.log(state);
+
     if (state === 'still') {
         $(this).attr('src', $(this).attr('data-dynamic'));
         $(this).attr('data-state', 'dynamic');
@@ -82,14 +83,3 @@ $("#add-gif").on("click", function (event) {
 })
 renderButtons();
 $(document).on("click", ".gif", displayGif);
-
-
-
-// Create buttons on load
-// create and get a value from those buttons to use in api url
-// run an api key and append to DOM
-// Make search field 
-// Take search term and make button with value
-// Images are static onload
-// If an image is clicked it becomes dynamic
-// If an image is dynamic and is then clicked it becomes static again
