@@ -1,0 +1,17 @@
+body {
+    text-align: center;
+    /* background-size: 100%;
+    background-image: linear-gradient(to bottom right, teal, blue); 
+    background-repeat: no-repeat; */
+    background-color: aliceblue;
+}
+h1 {
+    font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+}
+.gif {
+    margin: 4px;
+}
+#add-gif {
+    margin: 4px;
+
+}

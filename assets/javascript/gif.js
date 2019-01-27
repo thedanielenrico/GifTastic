@@ -1,6 +1,6 @@
 
 
-var gifArray = ['dog', 'cat', 'rabbit', 'hawk'];
+var gifArray = ['Seinfeld', 'Waynes World', 'SNL', 'Dr. Who', 'Nature', 'Cats', 'Dog', 'Elon Musk', 'Jeff Bezos', 'Math', 'Software'];
 var $main = $("#main");
 
 function displayGif() {
@@ -20,7 +20,6 @@ function displayGif() {
             var $gifImage = $("<img>");
             var $imageDiv = $("<div>");
             var rating = $(`<p>Rating: ${gif[i].rating}</p>`);
-            console.log(rating);
 
             $gifImage.attr("src", imageUrlStatic);
             $gifImage.attr("alt", "gif");
@@ -70,13 +69,15 @@ function renderButtons() {
 
 // Add new gif buttons
 $("#add-gif").on("click", function (event) {
-
+    
     event.preventDefault();
 
     var userSearch = $("#gif-input").val().trim();
 
     gifArray.push(userSearch);
     renderButtons();
+    $("#gif-input").val(" ")
+
 
 })
 renderButtons();

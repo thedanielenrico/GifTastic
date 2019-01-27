@@ -1,1 +1,2 @@
 # GifTastic
+This is an API and AJAX based web app built with jQuery, JavsScript, CSS, and HTML. You can choose to view gifs from the provided list or add your own! Go ahead and try it out and enjoy the large database of gifs provided through the Giphy API.
